@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- font awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- myCSS -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- vue -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
+
 <body>
     <!-- app -->
     <div id="app" v-cloak>
@@ -23,15 +31,19 @@
             <div class="container">
                 <!-- input -->
                 <div class="input-zone">
-                    <input id="text" type="text" v-model="newTodoText" @keyup.enter="addNewTodo()">
-                    <button @click="addNewTodo()">aggiungi</button>
+                    <form @submit.prevent="addNewTodo">
+                        <input id="text" type="text" v-model="newTodoText">
+                        <button type="submit">aggiungi</button>
+                    </form>
                 </div>
                 <!-- /input -->
                 <!-- lista -->
                 <div class="lista">
                     <ul v-if="todoList.length > 0">
                         <li v-for="(item, index) in todoList">
-                            <div id="list-item-content"><span @click="doneCheck(index)" :class="{barra: item.done}">{{item.text}}</span><i class="fa-solid fa-xmark" @click="remover(index)"></i></div>
+                            <div id="list-item-content"><span @click="doneCheck(index)"
+                                    :class="{barra: item.done}">{{item.text}}</span><i class="fa-solid fa-xmark"
+                                    @click="remover(index)"></i></div>
                         </li>
                     </ul>
                     <div id="sostituto-lista" v-else>nessun elemento in lista</div>
@@ -42,10 +54,8 @@
         <!-- /main -->
     </div>
     <!-- /app -->
-    
-    <!-- vue -->
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <!-- myJS -->
-    <script src="js/main.js"></script>
+    <script src="main.js"></script>
 </body>
+
 </html>

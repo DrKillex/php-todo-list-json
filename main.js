@@ -5,38 +5,43 @@ const { createApp } = Vue
 createApp({
     data() {
         return {
-            todoList: [
-                {
-                    text: 'testo 1',
-                    done: false
-                },
-                {
-                    text: 'testo 2',
-                    done: true
-                }
-            ],
+            todoList: [],
             newTodoText: '',
         }
     },
     methods: {
         //rimuove l elemento selezionato dalla lista
-        remover(index){
-            this.todoList.splice(this.todoList[index],1)
+        remover(index) {
+            this.todoList.splice(this.todoList[index], 1)
             console.log(index)
         },
         // aggiunge nuovo elemento alla lista
-        addNewTodo(){
-            if(this.newTodoText.trim() !== ''){
-                this.todoList.push({text: this.newTodoText, done: false})
-                this.newTodoText = ''
-            } else {
-                this.todoList.push({text: 'forse se scrivi qualcosa magari è meglio eh...che dici?', done: false})
-                this.newTodoText = ''
-            }
+        addNewTodo() {
+
+                const data = {
+                    newTodo: this.newTodoText
+                }
+                axios.post('server.php',data , {
+                    Headers: {'Content-type': 'multipart/form-data'}
+                })
+                .then((response) => {
+                    console.log(response);
+                    this.todoList = response.data
+                })
+
+
         },
         //inverte done true con false e viceversa
-        doneCheck(index){
+        doneCheck(index) {
             this.todoList[index].done = !this.todoList[index].done
         }
+    },
+    created() {
+        axios.get('server.php')
+            .then((response) => {
+                console.log(response);
+                this.todoList = response.data
+            })
+
     }
 }).mount('#app')
