@@ -17,19 +17,18 @@ createApp({
         },
         // aggiunge nuovo elemento alla lista
         addNewTodo() {
-
-                const data = {
+            if (this.newTodoText.trim() !== '') {
+                const newTodo = {
                     newTodo: this.newTodoText
                 }
-                axios.post('server.php',data , {
-                    Headers: {'Content-type': 'multipart/form-data'}
+                axios.post('server.php', newTodo , {
+                    headers:{'Content-Type': 'multipart/form-data'}                   
                 })
                 .then((response) => {
-                    console.log(response);
                     this.todoList = response.data
                 })
-
-
+                this.newTodoText = ''
+            }
         },
         //inverte done true con false e viceversa
         doneCheck(index) {
