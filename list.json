@@ -1,1 +1,8 @@
-[{"text":"sadsadsad","done":true},{"text":"asdsadasd","done":false},{"text":"sadasd","done":true}]
+[
+    {"text":"HTML","done":true},
+    {"text":"CSS","done":true},
+    {"text":"Responsive design","done":true},
+    {"text":"Javascript","done":true},
+    {"text":"PHP","done":true},
+    {"text":"Laravel","done":false}
+]
