@@ -12,8 +12,15 @@ createApp({
     methods: {
         //rimuove l elemento selezionato dalla lista
         remover(index) {
-            this.todoList.splice(this.todoList[index], 1)
-            console.log(index)
+            const deleteThis = {
+                deleteThis: index
+            }
+            axios.post('server.php', deleteThis , {
+                headers:{'Content-Type': 'multipart/form-data'}                   
+            })
+            .then((response) => {
+                this.todoList = response.data
+            })
         },
         // aggiunge nuovo elemento alla lista
         addNewTodo() {
@@ -32,7 +39,15 @@ createApp({
         },
         //inverte done true con false e viceversa
         doneCheck(index) {
-            this.todoList[index].done = !this.todoList[index].done
+            const check = {
+                check: index
+            }
+            axios.post('server.php', check , {
+                headers:{'Content-Type': 'multipart/form-data'}                   
+            })
+            .then((response) => {
+                this.todoList = response.data
+            })
         }
     },
     created() {
